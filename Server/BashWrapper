@@ -1,0 +1,26 @@
+#!/bin/bash
+
+echo -ne "\nWaiting: "
+while [ "`date "+%S"`" != "59" ]
+do
+echo -n "`date "+%S"`."
+sleep .5s
+done
+
+
+while (true)
+do
+
+killall -9 knockd 2>/dev/null
+sleep 1s
+./PerlGen
+#./knockd -D -v -c knockd.conf &
+./knockd -c knockd.conf &
+echo -ne "\nWaiting:"
+
+while [ "`date "+%S"`" != "59" ]
+do
+echo -n "`date "+%S"`."
+sleep .5s
+done
+done
